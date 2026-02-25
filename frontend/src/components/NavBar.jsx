@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import Button from '../utils/Button';
 
 const NavBar = () => {
   return (
@@ -9,7 +10,12 @@ const NavBar = () => {
             <Link to="/">
               <img src="/logo.png" alt="Logo" />
             </Link>
-            <Link to="/register" className='hover:underline'>Register</Link>
+            <div className='flex gap-3'>
+                <Link to="/login" className='hover:underline'>
+                <Button name="Login" /></Link>
+                <Link to="/register" className='hover:underline'>
+                <Button name="Register" /></Link>
+            </div>
         </div>
     </nav>
 

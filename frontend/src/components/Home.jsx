@@ -6,12 +6,19 @@ const Home = () => {
             <div className="w-full h-150 flex gap-4">
 
                 {/* Left Side */}
-                <div className="w-1/2 overflow-hidden">
+                <div className="w-1/2 overflow-hidden relative">
                     <img
                         src="/1.png"
                         alt="1"
                         className="w-full h-full object-cover"
                     />
+                    <div className="flex flex-col justify-between ">
+                        <p className='absolute top-4 left-4 text-white font-bold'>business</p>
+                        <div className='absolute bottom-0 left-0 right-0  from-black to-transparent p-4'>
+                            <p className="text-white text-sm">description</p>
+                            <h1 className="text-white text-2xl font-bold">name</h1>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Right Side */}
