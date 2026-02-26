@@ -1,7 +1,8 @@
-import { useState,useEffect } from 'react'
+import { useState } from 'react'
 import Button from '../utils/Button'
-import { Link } from 'react-router-dom'
-import { registerJS } from '../JS/register';
+import { Link, useNavigate } from 'react-router-dom'
+import toast from "react-hot-toast";
+
 
 const Register = () => {
 
@@ -10,8 +11,9 @@ const Register = () => {
         email: "",
         password: "",
     });
+    const navigate = useNavigate();
 
-    const handleChange = async(e) => {
+    const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
@@ -21,10 +23,9 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form Data: ", JSON.stringify(formData));
 
-         try {
-            const response = await fetch("http://localhost:9000/api/register", {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -33,12 +34,15 @@ const Register = () => {
             });
 
             const data = await response.json();
-            console.log("Success:", data);
-            return data;
+            if(data.success === true){
+                toast.success('Registration Successfully!')
+                navigate("/login"); 
+            }else{
+                toast.error("Registration Failed.")
+            }
         }
         catch (error) {
-            console.error("Error:", error);
-            return error;
+            toast.error(error)
         }
 	}
 

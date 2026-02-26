@@ -12,6 +12,7 @@ import Login from './components/Login'
 import { useLocation } from 'react-router-dom';
 import Entertainment from './components/Entertainment'
 import Health from './components/Health'
+import { Toaster } from "react-hot-toast";
 
 
 const App = () => {
@@ -19,14 +20,14 @@ const App = () => {
     const currentPath = location.pathname;
 
     const routeDirectory = [
-        {path:"/",component: <Home />},
-        {path:"/international",component: <International />},
-        {path:"/sports",component: <Sports />},
-        {path:"/business",component: <Business />},
-        {path:"/technology",component: <Technology />},
-        {path:"/entertainment",component: <Entertainment />},
-        {path:"/health",component: <Health />},
-        {path:"/science",component: <Science />}
+        { path:"/", component: <Home /> },
+        { path:"/international", component: <International /> },
+        { path:"/sports", component: <Sports /> },
+        { path:"/business", component: <Business /> },
+        { path:"/technology", component: <Technology /> },
+        { path:"/entertainment", component: <Entertainment /> },
+        { path:"/health", component: <Health /> },
+        { path:"/science", component: <Science /> }
     ]
 
     return (
@@ -42,7 +43,12 @@ const App = () => {
                     ))}
                 </Routes>
             </div>
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+            />
         </div>
+        
     )
 }
 
