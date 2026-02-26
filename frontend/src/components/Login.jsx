@@ -12,11 +12,11 @@ const Login = () => {
                         <h1 className='flex font-bold text-3xl justify-center'>Login to your account</h1>
                         <form className='w-full h-5/6 pt-3 gap-2'>
                             <div className='grid grid-flow-row gap-2'>
-                                <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>name</label>
+                                <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>email</label>
                                 <input
-                                    type="text"
+                                    type="email"
                                     className="appearance-none w-full text-gray-700 ring-1 border-gray-100 rounded p-2 py-3 mb-3 outline-none focus:outline-none"
-                                    placeholder={"Enter Your Name"}
+                                    placeholder={"Enter Your Email"}
                                     required={false}
                                 />
                                 <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Password</label>

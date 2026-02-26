@@ -1,16 +1,45 @@
-"use client"
-import React, { useState } from 'react'
-import Label from '../utils/Label'
-import Input from '../utils/Input'
+import { useState,useEffect } from 'react'
 import Button from '../utils/Button'
 import { Link } from 'react-router-dom'
+import { registerJS } from '../JS/register';
 
 const Register = () => {
-	const [name, setName] = useState('')
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
 
-	function handleSubmit(e) {
+	const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        password: "",
+    });
+
+    const handleChange = async(e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log("Form Data: ", JSON.stringify(formData));
+
+         try {
+            const response = await fetch("http://localhost:9000/api/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const data = await response.json();
+            console.log("Success:", data);
+            return data;
+        }
+        catch (error) {
+            console.error("Error:", error);
+            return error;
+        }
 	}
 
 	return (
@@ -30,13 +59,28 @@ const Register = () => {
                                     className="appearance-none w-full text-gray-700 ring-1 border-gray-100 rounded p-2 py-3 mb-3 outline-none focus:outline-none"
                                     placeholder={"Enter Your Name"}
                                     required={false}
+                                    onChange={handleChange}
+                                    name="name"
                                 />
+
+                                <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>email</label>
+                                <input
+                                    type="email"
+                                    className="appearance-none w-full text-gray-700 ring-1 border-gray-100 rounded p-2 py-3 mb-3 outline-none focus:outline-none"
+                                    placeholder={"Enter Your Email"}
+                                    required={false}
+                                    onChange={handleChange}
+                                    name="email"
+                                />
+
                                 <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Password</label>
                                 <input
                                     type="password"
                                     className="appearance-none w-full text-gray-700 ring-1 border-gray-100 rounded p-2 py-3 mb-3 outline-none focus:outline-none"
                                     placeholder={"Enter Your Password"}
                                     required={false}
+                                    onChange={handleChange}
+                                    name="password"
                                 />
 
                                 <p className='text-red-500'>{/* error placeholder */}</p>
