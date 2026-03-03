@@ -3,6 +3,8 @@ import Button from '../utils/Button'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import toast from "react-hot-toast";
+import useAuthStore from '../stores/auth.store';
+import { userLogin } from '../lib/api/auth.api';
 
 const Login = () => {
 
@@ -11,6 +13,8 @@ const Login = () => {
         password: ""
     })
     const navigate = useNavigate();
+
+    const {setToken, setUser} = useAuthStore((state) => state)
 
     const handleChange = (e) =>{
         const {name, value } = e.target;
@@ -24,25 +28,19 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            });
-
-            const data = await response.json();
+            const data = await userLogin(formData);
             console.log("Success:", data);
-            if(data.success === true){
-                toast.success('Login Successfully!')
-                navigate("/"); 
-            }else{
-                toast.error("Login Failed.")
+            if (data && data.success === true) {
+                if (data.token) setToken(data.token);
+                if (data.user) setUser(data.user.name || data.user.email || 'User', data.user.email);
+                toast.success('Login Successfully!');
+                navigate("/");
+            } else {
+                toast.error(data?.message || "Login Failed.");
             }
         }
         catch (error) {
-            toast.error(error)
+            toast.error(error?.message || 'Login failed.')
         }
 	}
 

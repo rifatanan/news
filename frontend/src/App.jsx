@@ -13,6 +13,8 @@ import { useLocation } from 'react-router-dom';
 import Entertainment from './components/Entertainment'
 import Health from './components/Health'
 import { Toaster } from "react-hot-toast";
+import PrivateRoute from './routes/PrivateRoute'
+import CreateNews from './components/CreateNews'
 
 
 const App = () => {
@@ -20,14 +22,14 @@ const App = () => {
     const currentPath = location.pathname;
 
     const routeDirectory = [
-        { path:"/", component: <Home /> },
-        { path:"/international", component: <International /> },
-        { path:"/sports", component: <Sports /> },
-        { path:"/business", component: <Business /> },
-        { path:"/technology", component: <Technology /> },
-        { path:"/entertainment", component: <Entertainment /> },
-        { path:"/health", component: <Health /> },
-        { path:"/science", component: <Science /> }
+        { path: "/", component: <Home /> },
+        { path: "/international", component: <International /> },
+        { path: "/sports", component: <Sports /> },
+        { path: "/business", component: <Business /> },
+        { path: "/technology", component: <Technology /> },
+        { path: "/entertainment", component: <Entertainment /> },
+        { path: "/health", component: <Health /> },
+        { path: "/science", component: <Science /> }
     ]
 
     return (
@@ -41,6 +43,9 @@ const App = () => {
                     {routeDirectory.map((item) => (
                         <Route key={item.path} path={item.path} element={item.component} />
                     ))}
+                    <Route element={<PrivateRoute />}>
+                        <Route path="/create-news" element={<CreateNews />} />
+                    </Route>
                 </Routes>
             </div>
             <Toaster

@@ -1,9 +1,9 @@
 import Profile from "../models/profile.model.js";
 
 const profile = async(request, response) =>{
-     const authHeader = request.headers.authorization;
-     console.log('auth header',authHeader);
-     
+    const authHeader = request.headers.authorization;
+    console.log('auth header',authHeader);
+    
 
     if (!authHeader) {
         return response.status(401).json({ message: "No token provided" });

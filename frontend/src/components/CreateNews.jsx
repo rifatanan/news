@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import toast from "react-hot-toast";
 
-const CreatePost = () => {
+const CreateNews = () => {
 
     const categoryOption= [ "international", "sports", "business", "technology", "entertainment", "health", "science" ]
 
@@ -102,4 +102,4 @@ const CreatePost = () => {
     )
 }
 
-export default CreatePost
+export default CreateNews

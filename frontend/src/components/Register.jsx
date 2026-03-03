@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Button from '../utils/Button'
 import { Link, useNavigate } from 'react-router-dom'
 import toast from "react-hot-toast";
+import { userRegister } from '../lib/api/auth.api';
 
 
 const Register = () => {
@@ -25,15 +26,7 @@ const Register = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/register`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            });
-
-            const data = await response.json();
+            const data = await userRegister(formData);
             if(data.success === true){
                 toast.success('Registration Successfully!')
                 navigate("/login"); 

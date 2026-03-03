@@ -10,7 +10,11 @@ dotenv.config();
 const port = process.env.PORT;
 const app = express();
 
-app.use(cors());
+const FRONTEND = process.env.FRONTEND_URL || 'http://localhost:5173';
+app.use(cors({
+    origin: FRONTEND,
+    credentials: true,
+}));
 app.use(express.json());
 app.use(cookieParser());
 
