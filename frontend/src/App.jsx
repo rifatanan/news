@@ -16,7 +16,6 @@ import { Toaster } from "react-hot-toast";
 import PrivateRoute from './routes/PrivateRoute'
 import CreateNews from './components/CreateNews'
 
-
 const App = () => {
     const location = useLocation();
     const currentPath = location.pathname;
@@ -53,7 +52,6 @@ const App = () => {
                 reverseOrder={false}
             />
         </div>
-        
     )
 }
 

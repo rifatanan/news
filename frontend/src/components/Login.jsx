@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '../utils/Button'
 import { Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import toast from "react-hot-toast";
 import useAuthStore from '../stores/auth.store';
 import { userLogin } from '../lib/api/auth.api';
@@ -14,7 +14,11 @@ const Login = () => {
     })
     const navigate = useNavigate();
 
-    const {setToken, setUser} = useAuthStore((state) => state)
+    const { setToken, setUser, isAuthenticated } = useAuthStore((state) => state)
+
+    useEffect(() => {
+        if (isAuthenticated) navigate('/')
+    }, [isAuthenticated, navigate])
 
     const handleChange = (e) =>{
         const {name, value } = e.target;
@@ -30,9 +34,9 @@ const Login = () => {
         try {
             const data = await userLogin(formData);
             console.log("Success:", data);
-            if (data && data.success === true) {
-                if (data.token) setToken(data.token);
-                if (data.user) setUser(data.user.name || data.user.email || 'User', data.user.email);
+            if (data && data?.success === true) {
+                if (data?.token) setToken(data?.token);
+                if (data?.user) setUser( data?.user?.name, data?.user?.email);
                 toast.success('Login Successfully!');
                 navigate("/");
             } else {
@@ -59,7 +63,8 @@ const Login = () => {
                                     type="email"
                                     className="appearance-none w-full text-gray-700 ring-1 border-gray-100 rounded p-2 py-3 mb-3 outline-none focus:outline-none"
                                     placeholder={"Enter Your Email"}
-                                    required={false}
+                                    required
+                                    value={formData.email}
                                     onChange={handleChange}
                                 />
                                 <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Password</label>
@@ -68,7 +73,8 @@ const Login = () => {
                                     type="password"
                                     className="appearance-none w-full text-gray-700 ring-1 border-gray-100 rounded p-2 py-3 mb-3 outline-none focus:outline-none"
                                     placeholder={"Enter Your Password"}
-                                    required={false}
+                                    required
+                                    value={formData.password}
                                     onChange={handleChange}
                                 />
                             </div>
