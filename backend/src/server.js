@@ -4,6 +4,7 @@ import cors from'cors'
 import cookieParser from 'cookie-parser';
 import connectMongoDB from './configs/database.config.js';
 import userRoutes from "./routes/user.routes.js";
+import createNewsRoutes from "./routes/createNews.route.js";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(cookieParser());
 connectMongoDB();
 
 app.use("/api", userRoutes);
+app.use("/api", createNewsRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running in port: ${port}`);

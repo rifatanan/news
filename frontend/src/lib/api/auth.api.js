@@ -10,3 +10,9 @@ export const userLogin = async (userData) => {
     
     return response.data;
 }
+
+export const createNews = async (userData) => {
+    const response = await axios_instace.post('create-news', userData)
+    
+    return response.data;
+}
