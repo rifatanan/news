@@ -10,7 +10,10 @@ const CreateNews = () => {
 
     const categoryOption= [ "international", "sports", "business", "technology", "entertainment", "health", "science" ]
     const { userName } = useAuthStore((state) => state)
+<<<<<<< HEAD:frontend/src/components/CreateNews.jsx
 
+=======
+>>>>>>> create-post:frontend/src/components/CreatePost.jsx
 
     const [formData, setFormData] = useState({
         authorName: userName,
@@ -99,4 +102,8 @@ const CreateNews = () => {
     )
 }
 
+<<<<<<< HEAD:frontend/src/components/CreateNews.jsx
 export default CreateNews
+=======
+export default CreateNews
+>>>>>>> create-post:frontend/src/components/CreatePost.jsx
