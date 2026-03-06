@@ -3,12 +3,16 @@ import Button from '../utils/Button'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import toast from "react-hot-toast";
+import { createNews } from '../lib/api/auth.api';
+import useAuthStore from '../stores/auth.store';
 
-const CreatePost = () => {
+const CreateNews = () => {
 
     const categoryOption= [ "international", "sports", "business", "technology", "entertainment", "health", "science" ]
+    const { userName } = useAuthStore((state) => state)
 
     const [formData, setFormData] = useState({
+        authorName: userName,
         short_description: "",
         description: "",
         category: ""
@@ -27,21 +31,13 @@ const CreatePost = () => {
         e.preventDefault();
         
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            });
-
-            const data = await response.json();
+            const data = await createNews(formData);
             console.log("Success:", data);
             if(data.success === true){
-                toast.success('Login Successfully!')
+                toast.success('Create News Successfully!')
                 navigate("/");
             }else{
-                toast.error("Login Failed.")
+                toast.error("Create News Failed.")
             }
         }
         catch (error) {
@@ -102,4 +98,4 @@ const CreatePost = () => {
     )
 }
 
-export default CreatePost
+export default CreateNews
