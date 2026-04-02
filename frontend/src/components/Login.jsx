@@ -40,11 +40,13 @@ const Login = () => {
                 toast.success('Login Successfully!');
                 navigate("/");
             } else {
+                console.log('Error:', data?.message);
                 toast.error(data?.message || "Login Failed.");
             }
         }
         catch (error) {
-            toast.error(error?.message || 'Login failed.')
+            console.log('Error:', error?.message);
+            toast.error(error?.message || 'Login failed.');
         }
 	}
 

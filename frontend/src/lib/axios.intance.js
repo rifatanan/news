@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const axios_instace = axios.create({
+const axios_instance = axios.create({
     baseURL: import.meta.env.VITE_BACKEND_URL,
     headers: {
         'Content-Type': 'application/json',
@@ -8,7 +8,7 @@ const axios_instace = axios.create({
     withCredentials: true,
 });
 
-axios_instace.interceptors.request.use(config => {
+axios_instance.interceptors.request.use(config => {
     const token = localStorage.getItem('user');
     if (token) {
         config.headers['Authorization'] = `Bearer ${token}`;
@@ -18,4 +18,4 @@ axios_instace.interceptors.request.use(config => {
     return Promise.reject(error);
 });
 
-export default axios_instace;
+export default axios_instance;
