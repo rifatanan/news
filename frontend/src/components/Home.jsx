@@ -1,12 +1,31 @@
-import React from 'react'
+import { useEffect } from 'react'
+import useAuthStore from '../stores/auth.store'
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+    const { news } = useAuthStore((state) => state);
+    const fetchUsers = useAuthStore((state) => state.fetchUsers);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        fetchUsers();
+    }, [fetchUsers])
+
+    console.log('news', news)
+
+    const handleItemClick = (id) => {
+        navigate(`/news/${id}`);
+    };
+
     return (
         <div className="pt-10">
             <div className="w-full h-150 flex gap-4">
 
                 {/* Left Side */}
-                <div className="w-1/2 overflow-hidden relative">
+                <div
+                    className="w-1/2 overflow-hidden relative cursor-pointer"
+                    onClick={() => handleItemClick(news[0]?._id)} 
+                >
                     <img
                         src="/1.png"
                         alt="1"

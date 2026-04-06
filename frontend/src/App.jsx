@@ -15,6 +15,7 @@ import Health from './components/Health'
 import { Toaster } from "react-hot-toast";
 import PrivateRoute from './routes/PrivateRoute'
 import CreateNews from './components/CreateNews'
+import NewsDetails from './components/NewsDetails'
 
 const App = () => {
     const location = useLocation();
@@ -45,6 +46,7 @@ const App = () => {
                     <Route element={<PrivateRoute />}>
                         <Route path="/create-news" element={<CreateNews />} />
                     </Route>
+                    <Route path="/news/:newsId" element={<NewsDetails />} />
                 </Routes>
             </div>
             <Toaster
