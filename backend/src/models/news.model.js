@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 
-const createNewsSchema = new Schema({
+const NewsSchema = new Schema({
 
     authorName:{
         type:String,
@@ -34,6 +34,6 @@ const createNewsSchema = new Schema({
 })
 
 
-const CreateNews = model('CreateNews', createNewsSchema);
+const News = model('News', NewsSchema);
 
-export default CreateNews;
+export default News;

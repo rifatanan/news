@@ -3,13 +3,13 @@ import bcrypt from "bcrypt"
 
 const userSchema = new Schema({
 
-    name:{
+    name: {
         type:String,
         required:true,
         trim:true,
     },
 
-    email:{
+    email: {
         type:String,
         required: true,
         unique: true,
@@ -21,7 +21,7 @@ const userSchema = new Schema({
         ],
     },
 
-    password:{
+    password: {
         type:String,
         required: true,
     },

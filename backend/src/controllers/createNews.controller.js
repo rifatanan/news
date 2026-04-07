@@ -1,9 +1,15 @@
-import CreateNews from "../models/createNews.model.js";
+import News from "../models/news.model.js";
 
 const createNews = async(request, response) =>{
     try {
         const { authorName, short_description, description, category, imageURL } = request.body;
-        const createNews = await CreateNews.create({authorName, short_description, description, category, imageURL});
+        const createNews = await News.create({
+            authorName,
+            short_description,
+            description,
+            category,
+            imageURL
+        });
         
         response.status(201).json({
             success:true,

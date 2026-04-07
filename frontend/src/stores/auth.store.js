@@ -40,7 +40,7 @@ const useAuthStore = create()(devtools((set) => {
 
         fetchUsers: async () => {
             try {
-                const result = await fetch(`${import.meta.env.VITE_BACKEND_URL}/getData`);
+                const result = await fetch(`${import.meta.env.VITE_BACKEND_URL}/all-news`);
 
                 if (!result.ok) throw new Error('Failed to News.');
                 const data = await result?.json();

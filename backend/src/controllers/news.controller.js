@@ -1,4 +1,4 @@
-import CreateNews from "../models/createNews.model.js";
+import CreateNews from "../models/news.model.js";
 
 const getAllNews = async(request, response) =>{
     try {

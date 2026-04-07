@@ -5,18 +5,20 @@
 
     const register = async(request, response) =>{
         try {
-            const {name, email, password, } = request.body;
-            const exituser = await User.findOne({email});
+            const { name, email, password } = request.body;
 
-            if(exituser){
+            const exitingUser = await User.findOne({email});
+            if(exitingUser){
                 return response.status(201).json({
                     success:true,
-                    message: "User alredy exit. please login",
+                    message: "User alredy exit. Please login",
                 })
             }
 
-            const user = await User.create({name, email, password});
-            
+            const newUser = await User.create({ name, email, password });
+
+            const user = await User.findById(newUser._id).select("-password");
+
             response.status(201).json({
                 success:true,
                 message: "User created successfully.",

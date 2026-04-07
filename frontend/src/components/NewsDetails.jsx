@@ -17,7 +17,7 @@ const NewsDetails = () => {
 
     return (
         <div>
-            NewsDetails
+            
         </div>
     )
 }
