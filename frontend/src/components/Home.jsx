@@ -7,11 +7,13 @@ const Home = () => {
     const fetchUsers = useAuthStore((state) => state.fetchUsers);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        fetchUsers();
-    }, [fetchUsers])
+    useEffect( () => {
+        const getUsers = async () => {
+            await fetchUsers();
+        };
 
-    console.log('news', news)
+        getUsers();
+    }, [])
 
     const handleItemClick = (id) => {
         navigate(`/news/${id}`);

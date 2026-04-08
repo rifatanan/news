@@ -15,13 +15,16 @@ const encodeToken = (email, id) =>{
 
 const decodeToken = (token) => {
     try {
-        const decoded = jwt.verify(token, key);
+        const decoded = jwt.verify(token, JWT_KEY);
         return decoded;
     } catch (error) {
         return null
     }
 }
 
-const authConfigs = {encodeToken, decodeToken};
+const authConfigs = {
+    encodeToken,
+    decodeToken
+};
 
 export default authConfigs;

@@ -4,7 +4,6 @@ import cors from'cors'
 import cookieParser from 'cookie-parser';
 import connectMongoDB from './configs/database.config.js';
 import userRoutes from "./routes/user.routes.js";
-import createNewsRoutes from "./routes/createNews.route.js";
 import newsRoutes from "./routes/news.route.js";
 
 dotenv.config();
@@ -13,6 +12,7 @@ const port = process.env.PORT;
 const app = express();
 
 const FRONTEND = process.env.FRONTEND_URL || 'http://localhost:5173';
+
 app.use(cors({
     origin: FRONTEND,
     credentials: true,
@@ -24,7 +24,6 @@ connectMongoDB();
 
 app.use('/api', newsRoutes)
 app.use("/api", userRoutes);
-app.use("/api", createNewsRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running in port: ${port}`);

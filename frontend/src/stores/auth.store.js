@@ -47,7 +47,6 @@ const useAuthStore = create()(devtools((set) => {
                 
                 // Update state with the fetched data
                 set({ news: data?.data });
-                console.log('news', news)
             } catch (err) {
                 set({ error: err.message });
             }

@@ -1,20 +1,20 @@
-import CreateNews from "../models/news.model.js";
+import News from "../models/news.model.js";
 
 const getAllNews = async(request, response) =>{
     try {
-        const newsList = await CreateNews.find();
+        const newsList = await News.find();
         
         response.status(200).json({
             success:true,
             message:"All News fetched successfully.",
-            data: newsList,
+            data: newsList
         })
 
     } catch (error) {
         response.status(500).json({
             success:false,
             message:"Something went wrong.",
-            error:error.toString(),
+            error:error.toString()
         })
     }
 }
@@ -24,7 +24,7 @@ const getSingleNews = async(request, response) =>{
     const newsId = request.params.id;
 
     try {
-        const singleNews = await CreateNews.findOne({_id:newsId});
+        const singleNews = await News.findOne({ _id: newsId });
         
         if (!singleNews) {
             return response.status(404).json({
@@ -36,22 +36,49 @@ const getSingleNews = async(request, response) =>{
         response.status(200).json({
             success: true,
             message: "Single News fetched Successfully.",
-            data: singleNews,
+            data: singleNews
         })
 
     } catch (error) {
         response.status(500).json({
             success: false,
             message: "Something went wrong.",
-            error:error.toString(),
+            error:error.toString()
         })
     }
 }
 
+const createNews = async(request, response) =>{
+    try {
+        const { authorName, short_description, description, category, imageURL } = request.body;
+
+        const createNews = await News.create({
+            authorName,
+            short_description,
+            description,
+            category,
+            imageURL
+        });
+        
+        response.status(201).json({
+            success:true,
+            message:"Successfully Created News.",
+            data: createNews
+        })
+
+    } catch (error) {
+        response.status(500).json({
+            success:false,
+            message:"Something went wrong.",
+            error:error.toString()
+        })
+    }
+}
 
 const newsController = {
     getAllNews,
-    getSingleNews
+    getSingleNews,
+    createNews
 }
 
 export default newsController;
