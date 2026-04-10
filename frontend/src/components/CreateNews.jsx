@@ -9,7 +9,7 @@ import axios from 'axios';
 
 const CreateNews = () => {
 
-    const categoryOption= [ "international", "sports", "business", "technology", "entertainment", "health", "science" ]
+    const categoryOption= [ "international", "sports", "business", "technology", "entertainment", "health", "science", "others" ]
     const { userName } = useAuthStore((state) => state)
 
     const [formData, setFormData] = useState({

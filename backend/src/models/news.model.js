@@ -31,7 +31,11 @@ const NewsSchema = new Schema({
         required:true,
         trim:true,
     }
-})
+},  
+    {
+        timestamps: true,
+    }
+)
 
 
 const News = model('News', NewsSchema);

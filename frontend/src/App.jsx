@@ -3,34 +3,19 @@ import NavBar from './components/NavBar'
 import Register from './components/Register'
 import Home from './components/Home'
 import SubNavBar from './components/SubNavBar'
-import International from './components/International'
-import Sports from './components/Sports'
-import Business from './components/Business'
-import Technology from './components/Technology'
-import Science from './components/Science'
 import Login from './components/Login'
-import { useLocation } from 'react-router-dom';
-import Entertainment from './components/Entertainment'
-import Health from './components/Health'
-import { Toaster } from "react-hot-toast";
+import { useLocation } from 'react-router-dom'
+import { Toaster } from "react-hot-toast"
 import PrivateRoute from './routes/PrivateRoute'
 import CreateNews from './components/CreateNews'
 import NewsDetails from './components/NewsDetails'
+import useAuthStore from './stores/auth.store'
+import Category from './components/Category'
 
 const App = () => {
     const location = useLocation();
     const currentPath = location.pathname;
-
-    const routeDirectory = [
-        { path: "/", component: <Home /> },
-        { path: "/international", component: <International /> },
-        { path: "/sports", component: <Sports /> },
-        { path: "/business", component: <Business /> },
-        { path: "/technology", component: <Technology /> },
-        { path: "/entertainment", component: <Entertainment /> },
-        { path: "/health", component: <Health /> },
-        { path: "/science", component: <Science /> }
-    ]
+    const { categoryOption } = useAuthStore((state) => state);
 
     return (
         <div className='w-full'>
@@ -38,10 +23,11 @@ const App = () => {
                 <NavBar />
                 {currentPath !== '/login' && currentPath !== '/register' && <SubNavBar />}
                 <Routes>
+                    <Route path="/" element={<Home />} />
                     <Route path="/register" element={<Register />} /> 
                     <Route path="/login" element={<Login />} /> 
-                    {routeDirectory.map((item) => (
-                        <Route key={item.path} path={item.path} element={item.component} />
+                    {categoryOption.map((item) => (
+                        <Route key={item.path} path={item.name} element={ <Category name={item.name} path={item.path} />} />
                     ))}
                     <Route element={<PrivateRoute />}>
                         <Route path="/create-news" element={<CreateNews />} />
