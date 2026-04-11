@@ -8,7 +8,7 @@ const NewsSchema = new Schema({
         trim:true,
     },
 
-    short_description:{
+    title:{
         type:String,
         required:true,
         trim:true,

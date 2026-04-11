@@ -16,19 +16,16 @@ const Home = () => {
     }, [])
 
     const handleItemClick = (id) => {
-        navigate(`/news/${id}`);
+        navigate(`/${news.category}/${id}`);
     };
-    console.log(news)
 
-    const groupedData = news.reduce((acc, item) => {
+    const groupedData = (news || []).reduce((acc, item) => {
         if (!acc[item.category]) {
             acc[item.category] = [];
         }
         acc[item.category].push(item);
         return acc;
     }, {});
-    console.log('gd', groupedData)
-
 
     return (
         <div className="pt-10">
@@ -129,14 +126,14 @@ const Home = () => {
                 </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 py-8 space-y-12">
+            <div className="max-w-8xl py-8 space-y-12">
                 {Object.entries(groupedData).map(([category, items]) => (
                     <div key={category}>
                     <h2 className="text-2xl font-bold capitalize mb-6 border-b pb-2">
                         {category}
                     </h2>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
                         {items.slice(0, 6).map((item) => (
                         <div
                             key={item._id}

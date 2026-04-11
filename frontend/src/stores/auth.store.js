@@ -9,11 +9,12 @@ const useAuthStore = create()(devtools((set) => {
     const initialEmail = read('userEmail');
     const initialNews = read('news');
     const categoryOption = [
+        { name: "home", path: "/" },
         { name: "international", path: "/international" },
         { name: "sports", path: "/sports" },
         { name: "business", path: "/business" },
         { name: "technology", path: "/technology" },
-        { name: "intertainment", path: "/entertainment" },
+        { name: "entertainment", path: "/entertainment" },
         { name: "health", path: "/health" },
         { name: "science", path: "/science" },
         { name: "others", path: "/others" }
@@ -55,8 +56,6 @@ const useAuthStore = create()(devtools((set) => {
 
                 if (!result.ok) throw new Error('Failed to News.');
                 const data = await result?.json();
-
-                console.log('data', data)
                 
                 // Update state with the fetched data
                 set({ news: data?.data });

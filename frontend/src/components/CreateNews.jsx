@@ -1,7 +1,5 @@
-import React from 'react'
-import Button from '../utils/Button'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import toast from "react-hot-toast";
 import { createNews } from '../lib/api/auth.api';
 import useAuthStore from '../stores/auth.store';
@@ -9,12 +7,11 @@ import axios from 'axios';
 
 const CreateNews = () => {
 
-    const categoryOption= [ "international", "sports", "business", "technology", "entertainment", "health", "science", "others" ]
-    const { userName } = useAuthStore((state) => state)
+    const { userName, categoryOption } = useAuthStore((state) => state)
 
     const [formData, setFormData] = useState({
         authorName: userName,
-        short_description: "",
+        title: "",
         description: "",
         category: ""
     })
@@ -88,16 +85,16 @@ const CreateNews = () => {
                         <div className='grid grid-flow-row gap-2'>
                             <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Short Description</label>
                             <input
-                                name="short_description"
+                                name="title"
                                 type="text"
                                 className="appearance-none w-full text-gray-700 ring-1 border-gray-100 rounded p-2 py-3 mb-3 outline-none focus:outline-none"
-                                placeholder={"Enter Your short description"}
+                                placeholder={"Enter Your Title"}
                                 required={true}
-                                value={formData.short_description}
+                                value={formData.title}
                                 onChange={handleChange}
                             />
                             <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>Description</label>
-                            <input
+                            <textarea
                                 name='description'
                                 type="text"
                                 className="appearance-none w-full text-gray-700 ring-1 border-gray-100 rounded p-2 py-3 mb-3 outline-none focus:outline-none"
@@ -126,13 +123,13 @@ const CreateNews = () => {
                             >
                                 <option value="" disabled>Select a category</option>
                                 {categoryOption.map((item, index) =>
-                                    <option value={item} className=' capitalize' key={index}>{item}</option>
+                                    <option value={item} className=' capitalize' key={index}>{item.name}</option>
                                 )}
                             </select>
                         </div>
                         <button 
                             type='submit'
-                            className={`bg-cyan-400 text-white font-[Poppins] duration-500 md:my-0 p-2 py-2 hover:bg-cyan-500 rounded-md cursor-pointer`}
+                            className={`bg-cyan-400 text-white font-[Poppins] duration-500 md:my-0 p-2 py-2 rounded-md cursor-pointer`}
                             disabled={isLoading}
                         >{ isLoading? "Submitting":"Submit" }
                         </button>

@@ -22,6 +22,7 @@ const Login = () => {
 
     const handleChange = (e) =>{
         const {name, value } = e.target;
+        console.log('name:'+name+" value:",value)
         setFormData(prev => ({
             ...prev,
             [name] : value
@@ -33,7 +34,6 @@ const Login = () => {
 
         try {
             const data = await userLogin(formData);
-            console.log("Success:", data);
             if (data && data?.success === true) {
                 if (data?.token) setToken(data?.token);
                 if (data?.user) setUser( data?.user?.name, data?.user?.email);
@@ -88,7 +88,7 @@ const Login = () => {
                         </form>
                     </div>
                 </div>
-            </div>
+            </div>  
         </div>
     )
 }

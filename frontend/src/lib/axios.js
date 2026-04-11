@@ -17,3 +17,12 @@ export const getSingleNews = async (singleData) => {
         throw error.response.data;
     }
 }
+
+export const getCategoryNews = async (categoryData) => {
+    try {
+        const response = await axios_instance.get(`category-news/${categoryData}`);
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+}
